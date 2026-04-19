@@ -54,7 +54,7 @@ After you publish (see [Publishing](#publishing)):
 
 ```yaml
 dependencies:
-  hidden_dev_pannel: ^0.1.0
+  hidden_dev_pannel: ^0.1.1
 ```
 
 ```bash
@@ -209,7 +209,7 @@ dart pub publish --force
 - In consuming apps, switch from `path:` to:
 
   ```yaml
-  hidden_dev_pannel: ^0.1.0
+  hidden_dev_pannel: ^0.1.1
   ```
 
   then `flutter pub get`.
