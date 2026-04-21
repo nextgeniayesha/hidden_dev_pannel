@@ -59,7 +59,8 @@ class AppLoggerPlus extends StatelessWidget {
     final effectiveEnvironmentOptions =
         environmentOptionsBuilder?.call() ?? environmentOptions;
     final navigatorState =
-        navigatorKey?.currentState ?? Navigator.maybeOf(context, rootNavigator: true);
+        navigatorKey?.currentState ??
+        Navigator.maybeOf(context, rootNavigator: true);
     if (navigatorState == null) return;
     await navigatorState.push(
       MaterialPageRoute<void>(
@@ -75,4 +76,3 @@ class AppLoggerPlus extends StatelessWidget {
     );
   }
 }
-
