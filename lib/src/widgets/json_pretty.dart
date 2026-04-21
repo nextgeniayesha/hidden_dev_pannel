@@ -49,8 +49,9 @@ class JsonPretty {
     }
     if (map.containsKey('variables')) {
       final sortedVars = sortJson(map['variables']);
-      final varsPretty =
-          const JsonEncoder.withIndent('    ').convert(sortedVars);
+      final varsPretty = const JsonEncoder.withIndent(
+        '    ',
+      ).convert(sortedVars);
       buffer.writeln('  , "variables": $varsPretty');
     }
     buffer.write('}');
@@ -85,7 +86,7 @@ class JsonPretty {
 
       final looksJsonObjectOrArray =
           (text.startsWith('{') && text.endsWith('}')) ||
-              (text.startsWith('[') && text.endsWith(']'));
+          (text.startsWith('[') && text.endsWith(']'));
       final looksWrappedJsonString =
           (text.startsWith('"') && text.endsWith('"'));
 
@@ -125,7 +126,8 @@ class JsonPretty {
     if (text.isEmpty) return null;
 
     final lower = text.toLowerCase();
-    final looksGraphQl = (lower.startsWith('query ') ||
+    final looksGraphQl =
+        (lower.startsWith('query ') ||
             lower.startsWith('mutation ') ||
             lower.startsWith('subscription ') ||
             lower.startsWith('fragment ')) &&

@@ -7,8 +7,7 @@ import '../models/http_method.dart';
 /// Records every Dio request/response for [DevPanelInspector].
 class DevPanelDioInterceptor extends Interceptor {
   /// [RequestOptions.extra] only allows [String] keys (see Dio `extra` typing).
-  static const String _sentExtraKey =
-      'hidden_dev_pannel.sent_time';
+  static const String _sentExtraKey = 'hidden_dev_pannel.sent_time';
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {

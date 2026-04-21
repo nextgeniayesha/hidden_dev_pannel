@@ -1,3 +1,9 @@
+## 0.1.2
+
+* Add `HiddenDevPanelPage` as a reusable package-level wrapper around `DeveloperPanelScreen`.
+* Add configurable built-in Deeplinks and Environment tabs (`DevPanelDeepLinkTemplate`, `DevPanelEnvironmentOption`) to keep app integration thin.
+* Export the new wrapper and models from `hidden_dev_pannel.dart`.
+
 ## 0.1.1
 
 * Correct `repository` URL in `pubspec.yaml` so pub.dev links to the real GitHub repo.

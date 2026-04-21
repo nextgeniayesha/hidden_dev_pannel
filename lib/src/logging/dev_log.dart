@@ -24,9 +24,8 @@ final class DevLogService {
   final List<DevLogEntry> _pending = <DevLogEntry>[];
   bool _flushScheduled = false;
 
-  final ValueNotifier<List<DevLogEntry>> logs = ValueNotifier<List<DevLogEntry>>(
-    const <DevLogEntry>[],
-  );
+  final ValueNotifier<List<DevLogEntry>> logs =
+      ValueNotifier<List<DevLogEntry>>(const <DevLogEntry>[]);
 
   void capturePrint(String line) {
     final normalized = line.trim();
@@ -38,16 +37,12 @@ final class DevLogService {
     final level = lower.contains('error') || lower.contains('exception')
         ? DevLogLevel.error
         : lower.contains('warn')
-            ? DevLogLevel.warning
-            : lower.contains('info')
-                ? DevLogLevel.info
-                : DevLogLevel.debug;
+        ? DevLogLevel.warning
+        : lower.contains('info')
+        ? DevLogLevel.info
+        : DevLogLevel.debug;
     _enqueueLog(
-      DevLogEntry(
-        timestamp: DateTime.now(),
-        level: level,
-        message: normalized,
-      ),
+      DevLogEntry(timestamp: DateTime.now(), level: level, message: normalized),
     );
   }
 

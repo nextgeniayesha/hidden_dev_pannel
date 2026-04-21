@@ -46,14 +46,12 @@ class _DeveloperPanelScreenState extends State<DeveloperPanelScreen>
   final ScrollController _logsScrollController = ScrollController();
   final ScrollController _requestsScrollController = ScrollController();
   final ValueNotifier<Set<DevLogLevel>> _selectedLevels =
-      ValueNotifier<Set<DevLogLevel>>(
-    {
-      DevLogLevel.debug,
-      DevLogLevel.info,
-      DevLogLevel.warning,
-      DevLogLevel.error,
-    },
-  );
+      ValueNotifier<Set<DevLogLevel>>({
+        DevLogLevel.debug,
+        DevLogLevel.info,
+        DevLogLevel.warning,
+        DevLogLevel.error,
+      });
 
   @override
   void initState() {
@@ -219,8 +217,9 @@ class _DeveloperPanelScreenState extends State<DeveloperPanelScreen>
                                   return Container(
                                     padding: const EdgeInsets.all(10),
                                     decoration: BoxDecoration(
-                                      color: _colorForLevel(entry.level)
-                                          .withValues(alpha: 0.1),
+                                      color: _colorForLevel(
+                                        entry.level,
+                                      ).withValues(alpha: 0.1),
                                       borderRadius: BorderRadius.circular(8),
                                     ),
                                     child: Row(
@@ -233,8 +232,10 @@ class _DeveloperPanelScreenState extends State<DeveloperPanelScreen>
                                           ),
                                         ),
                                         IconButton(
-                                          icon:
-                                              const Icon(Icons.copy, size: 18),
+                                          icon: const Icon(
+                                            Icons.copy,
+                                            size: 18,
+                                          ),
                                           tooltip: 'Copy this log',
                                           onPressed: () =>
                                               _copySingleLog(entry),
@@ -289,8 +290,7 @@ class _DeveloperPanelScreenState extends State<DeveloperPanelScreen>
                   ),
                   const Spacer(),
                   IconButton(
-                    onPressed: () =>
-                        DevPanelInspector().clearAllRequests(),
+                    onPressed: () => DevPanelInspector().clearAllRequests(),
                     icon: const Icon(Icons.delete_outline),
                     tooltip: 'Clear calls',
                   ),
@@ -311,9 +311,12 @@ class _DeveloperPanelScreenState extends State<DeveloperPanelScreen>
                       itemCount: filteredRequests.length,
                       itemBuilder: (context, index) {
                         final request = filteredRequests[index];
-                        final duration = (request.receivedTime != null &&
+                        final duration =
+                            (request.receivedTime != null &&
                                 request.sentTime != null)
-                            ? request.receivedTime!.difference(request.sentTime!)
+                            ? request.receivedTime!.difference(
+                                request.sentTime!,
+                              )
                             : null;
                         return ExpansionTile(
                           title: Text(
@@ -346,10 +349,7 @@ class _DeveloperPanelScreenState extends State<DeveloperPanelScreen>
                           children: [
                             _jsonSection('Request Headers', request.headers),
                             _jsonSection('Request Body', request.requestBody),
-                            _jsonSection(
-                              'Response Body',
-                              request.responseBody,
-                            ),
+                            _jsonSection('Response Body', request.responseBody),
                             const SizedBox(height: 8),
                           ],
                         );
@@ -394,7 +394,9 @@ class _DeveloperPanelScreenState extends State<DeveloperPanelScreen>
     }).toList();
   }
 
-  List<CapturedHttpRequest> _filteredRequests(List<CapturedHttpRequest> requests) {
+  List<CapturedHttpRequest> _filteredRequests(
+    List<CapturedHttpRequest> requests,
+  ) {
     final query = _apiSearchController.text.trim().toLowerCase();
     if (query.isEmpty) return requests;
 
@@ -435,9 +437,9 @@ class _DeveloperPanelScreenState extends State<DeveloperPanelScreen>
         .join('\n');
     await Clipboard.setData(ClipboardData(text: text));
     if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Logs copied')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Logs copied')));
     }
   }
 
@@ -457,9 +459,9 @@ class _DeveloperPanelScreenState extends State<DeveloperPanelScreen>
         '[${entry.level.name}] ${entry.timestamp.toIso8601String()} ${entry.message}';
     await Clipboard.setData(ClipboardData(text: text));
     if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Log copied')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Log copied')));
     }
   }
 

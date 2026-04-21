@@ -26,12 +26,15 @@ class DevGraphqlInspectorLink extends Link {
     };
     final body = _encodeBody(request);
 
-    return _httpLink.request(request, forward).transform(
+    return _httpLink
+        .request(request, forward)
+        .transform(
           StreamTransformer<Response, Response>.fromHandlers(
             handleData: (response, sink) {
               DevPanelInspector().addNewRequest(
                 CapturedHttpRequest(
-                  requestName: request.operation.operationName ??
+                  requestName:
+                      request.operation.operationName ??
                       _shortQueryLabel(request),
                   requestMethod: HttpCaptureMethod.post,
                   url: url,
@@ -47,22 +50,23 @@ class DevGraphqlInspectorLink extends Link {
             },
             handleError:
                 (Object error, StackTrace stack, EventSink<Response> sink) {
-              DevPanelInspector().addNewRequest(
-                CapturedHttpRequest(
-                  requestName: request.operation.operationName ??
-                      _shortQueryLabel(request),
-                  requestMethod: HttpCaptureMethod.post,
-                  url: url,
-                  headers: headers,
-                  requestBody: body,
-                  sentTime: sentTime,
-                  receivedTime: DateTime.now(),
-                  statusCode: null,
-                  responseBody: error.toString(),
-                ),
-              );
-              sink.addError(error, stack);
-            },
+                  DevPanelInspector().addNewRequest(
+                    CapturedHttpRequest(
+                      requestName:
+                          request.operation.operationName ??
+                          _shortQueryLabel(request),
+                      requestMethod: HttpCaptureMethod.post,
+                      url: url,
+                      headers: headers,
+                      requestBody: body,
+                      sentTime: sentTime,
+                      receivedTime: DateTime.now(),
+                      statusCode: null,
+                      responseBody: error.toString(),
+                    ),
+                  );
+                  sink.addError(error, stack);
+                },
           ),
         );
   }
@@ -70,8 +74,7 @@ class DevGraphqlInspectorLink extends Link {
   static String _shortQueryLabel(Request request) {
     try {
       final q = printNode(request.operation.document);
-      final parts =
-          q.split(RegExp(r'\s+')).where((s) => s.isNotEmpty).toList();
+      final parts = q.split(RegExp(r'\s+')).where((s) => s.isNotEmpty).toList();
       final first = parts.isEmpty ? null : parts.first;
       return first == null ? 'GraphQL' : 'GraphQL $first';
     } catch (_) {

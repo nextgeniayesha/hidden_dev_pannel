@@ -2,7 +2,7 @@ name: hidden_dev_pannel
 description: >-
   In-app developer panel with HTTP/API inspection, structured logs, and hooks
   for custom tabs — no third-party inspector packages required.
-version: 0.1.1
+version: 0.1.2
 repository: https://github.com/nextgeniayesha/hidden_dev_pannel
 
 topics:
