@@ -1,3 +1,10 @@
+## 0.1.3
+
+* Add `AppLoggerPlus` wrapper to open logger without route definitions.
+* Switch trigger to double-tap gesture.
+* Add `navigatorKey` support for apps where wrapper context has no `Navigator`.
+* Add `deepLinksBuilder` and `environmentOptionsBuilder` for dynamic tab state.
+
 ## 0.1.2
 
 * Add `HiddenDevPanelPage` as a reusable package-level wrapper around `DeveloperPanelScreen`.

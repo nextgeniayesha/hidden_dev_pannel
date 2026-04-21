@@ -20,6 +20,7 @@ class AppLoggerPlus extends StatelessWidget {
     this.environmentDescription,
     this.onSelectEnvironment,
     this.onPanelOpened,
+    this.navigatorKey,
   });
 
   final Widget child;
@@ -37,6 +38,7 @@ class AppLoggerPlus extends StatelessWidget {
 
   /// Optional callback whenever the panel is opened.
   final VoidCallback? onPanelOpened;
+  final GlobalKey<NavigatorState>? navigatorKey;
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +58,10 @@ class AppLoggerPlus extends StatelessWidget {
     final effectiveDeepLinks = deepLinksBuilder?.call() ?? deepLinks;
     final effectiveEnvironmentOptions =
         environmentOptionsBuilder?.call() ?? environmentOptions;
-    await Navigator.of(context, rootNavigator: true).push(
+    final navigatorState =
+        navigatorKey?.currentState ?? Navigator.maybeOf(context, rootNavigator: true);
+    if (navigatorState == null) return;
+    await navigatorState.push(
       MaterialPageRoute<void>(
         builder: (_) => HiddenDevPanelPage(
           title: title,
