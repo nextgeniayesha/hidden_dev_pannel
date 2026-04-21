@@ -9,3 +9,4 @@ export 'src/models/captured_http_request.dart';
 export 'src/models/http_method.dart';
 export 'src/widgets/developer_panel_screen.dart';
 export 'src/widgets/hidden_dev_panel_page.dart';
+export 'src/widgets/app_logger_plus.dart';
